@@ -222,7 +222,7 @@ var promise1 =(inputText) => new Promise((resolve, reject) => {
         message += inputText;
         //console.log(message);
         resolve(message);
-    }, 300)
+    }, 200)
 })
 
 function promise2(inputText) {
@@ -282,7 +282,15 @@ app.use(bodyParser.urlencoded({
 app.post('/callback', async (req, res) => {
  
   
-  await promise1("testHeroku");
+  var xxx = await mongoQuery();
+    //var yyy = await mongoInsert();
+    
+    
+    for(var idx =0; idx<xxx.length; idx++ )
+    {
+        await promise1(xxx[idx].address);
+        //await promise2(xxx[idx].address);
+    }
   
   
    const options = {
