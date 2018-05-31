@@ -49,6 +49,29 @@ blah();
 
 
 //====================================================Test  Await Async & MongpDB ==========================================
+
+
+
+
+
+const lineBot = require('@line/bot-sdk');
+const Client = require('@line/bot-sdk').Client;
+
+const clientBot_1 = new Client({
+  channelAccessToken:  "m81G1zHIiAVnjRzw8uaI5qmo67y52qDTFS/hbvlzZ2Rk+2duidmzb8BjBthXhSixTZNGTi+RcPVHA4swVQ6u7qny7mmOOQ1uOmoNQEmzn/v+KfOepBolIdQSWuaobWotiy+eujrcPRlRRwqL+o24BQdB04t89/1O/w1cDnyilFU=",
+  channelSecret: "63a9935f29b6291ad70f8338ba85d6a9"
+});
+
+
+const clientBot_2 = new Client({
+  channelAccessToken: "MIUh7d76Z4iiNMs+JJ1pvAybjvYITjUIz049ReoemdIlIsE4dMT28BgXf25yYKbEGPzEln4VnY6/DlnSikKzB65DqlybhARgctZHpj67J2dkS3qVN1W1v10V/pD1M7q7uGCXbik5zBtOaxUtcpi59QdB04t89/1O/w1cDnyilFU=",
+  channelSecret: "0f07f9ebcdc0ef6a56bd60500a20de47"
+});
+
+
+
+
+
 const http = require('http');
 const PORT = process.env.PORT || 5000;
 
