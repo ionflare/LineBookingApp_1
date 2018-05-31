@@ -199,8 +199,9 @@ blah();
 
 // import modules
 
-const lineBot = require('@line/bot-sdk');
-const Client = require('@line/bot-sdk').Client;
+
+
+
 
 const express = require('express')
 const request = require('request')
@@ -209,20 +210,90 @@ const bodyParser = require('body-parser')
 // create a new express server
 const app = express()
 
+
+var MongoClient = require('mongodb').MongoClient
+//var url = "mongodb://localhost:27017";
+var url = "mongodb://chanon:chanon1234@ds135552.mlab.com:35552/mlabtest";
+
+var message = "Init ";
+
+var promise1 =(inputText) => new Promise((resolve, reject) => {
+    setTimeout(() => {
+        message += inputText;
+        //console.log(message);
+        resolve(message);
+    }, 300)
+})
+
+function promise2(inputText) {
+
+   return new Promise( ( resolve, reject ) => {
+      message += inputText;
+      resolve('gg');
+  } );
+}
+
+
+
+
+function mongoQuery() {
+    
+    return new Promise( ( resolve, reject ) => {
+   
+     MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    //var dbo = db.db("mydb");
+    var dbo = db.db("mlabtest");
+    var query = { name: "Test ja"};
+    //dbo.collection("customers").findOne({}, function(err, result) {
+    dbo.collection("customers").find(query).toArray(function(err, result)
+    {
+    if (err) { return reject( err );}
+    else{
+        resolve(result);
+  
+    }
+
+    db.close();
+    });
+    });
+   
+  });
+  
+}    
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({
   extended: true
 })) // for parsing application/x-www-form-urlencoded
 
-app.post('/callback', (req, res) => {
-  const options = {
+app.post('/callback', async (req, res) => {
+ 
+  
+  await promise1("testHeroku");
+  
+  
+   const options = {
     method: 'POST',
     uri: 'https://api.line.me/v2/bot/message/reply',
     body: {
       replyToken: req.body.events[0].replyToken,
       messages: [{
         type: 'text',
-        text: req.body.events[0].message.text // ここに指定した文字列がボットの発言になる
+        //text: req.body.events[0].message.text // ここに指定した文字列がボットの発言になる
+        text: message // ここに指定した文字列がボットの発言になる
       }]
     },
     auth: {
@@ -230,10 +301,11 @@ app.post('/callback', (req, res) => {
     },
     json: true
   }
-  request(options, (err, response, body) => {
+  
+  await request(options, (err, response, body) => {
     console.log(JSON.stringify(response))
   })
-  res.send('OK')
+  await res.send('OK')
 })
 
 app.listen(process.env.PORT || 3000, () => {
