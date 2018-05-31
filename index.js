@@ -53,7 +53,7 @@ blah();
 
 
 
-
+/*
 const lineBot = require('@line/bot-sdk');
 const Client = require('@line/bot-sdk').Client;
 
@@ -67,9 +67,6 @@ const clientBot_2 = new Client({
   channelAccessToken: "MIUh7d76Z4iiNMs+JJ1pvAybjvYITjUIz049ReoemdIlIsE4dMT28BgXf25yYKbEGPzEln4VnY6/DlnSikKzB65DqlybhARgctZHpj67J2dkS3qVN1W1v10V/pD1M7q7uGCXbik5zBtOaxUtcpi59QdB04t89/1O/w1cDnyilFU=",
   channelSecret: "0f07f9ebcdc0ef6a56bd60500a20de47"
 });
-
-
-
 
 
 const http = require('http');
@@ -112,34 +109,6 @@ function promise3() {
   } );
 }
 
-/*
-function mongoQuery() {
-    
-    return new Promise( ( resolve, reject ) => {
-   
-     MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    //var dbo = db.db("mydb");
-    var dbo = db.db("mlabtest");
-    //dbo.collection("customers").findOne({}, function(err, result) {
-    dbo.collection("customers").findOne({}, function(err, result) {
-      
-       if ( err )
-       return reject( err );
-        else
-                {
-                 resolve(result);
-                }
-        //if (err) throw err;
-        //console.log(result.name + " " +result.address);
-        db.close();
-        });
-    });
-   
-  });
-  
-}    
-*/
 function mongoQuery() {
     
     return new Promise( ( resolve, reject ) => {
@@ -192,19 +161,7 @@ function mongoInsert() {
   });
   
 }    
- 
-/*
-const blah = async function (){
-    
-    var xxx = await mongoQuery();
-   await promise1(xxx.name);
-   await promise2(xxx.address);
-  //await promise3();
-    
-    //await console.log(message); 
-}
 
-*/
 const blah = async function (){
     
     var xxx = await mongoQuery();
@@ -237,15 +194,37 @@ const server_begin =  server.listen(PORT, () => {
 })
 
 blah();    
-
-/*
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
-});
-server.listen(PORT, () => {
-  console.log(`Server running on ${PORT}/`);
-});
 */
+const LINE_CHANNEL_ACCESS_TOKEN = "+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU=";
+
+var express = require('express');
+var bodyParser = require('body-parser');
+var request = require('request');
+var app = express();
+
+app.post('/webhook', function(req, res, next){
+    res.status(200).end();
+    for (var event of req.body.events){
+        if (event.type == 'message' && event.message.text == 'ハロー'){
+            var headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + LINE_CHANNEL_ACCESS_TOKEN
+            }
+            var body = {
+                replyToken: event.replyToken,
+                messages: [{
+                    type: 'text',
+                    text: 'こんにちは'
+                }]
+            }
+            var url = 'https://api.line.me/v2/bot/message/reply';
+            request({
+                url: url,
+                method: 'POST',
+                headers: headers,
+                body: body,
+                json: true
+            });
+        }
+    }
+});
