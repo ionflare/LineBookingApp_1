@@ -195,9 +195,13 @@ const server_begin =  server.listen(PORT, () => {
 
 blah();    
 */
-//const LINE_CHANNEL_ACCESS_TOKEN = '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU=';
+
 
 // import modules
+
+const lineBot = require('@line/bot-sdk');
+const Client = require('@line/bot-sdk').Client;
+
 const express = require('express')
 const request = require('request')
 const bodyParser = require('body-parser')
