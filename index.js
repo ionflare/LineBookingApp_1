@@ -310,8 +310,20 @@ app.use(bodyParser.urlencoded({
 
 app.post('/callback', async (req, res) => {
  
-  await replyYesNoTemplate(clientBot_2, req.body.events[0].replyToken, "ee", "qq");
+    var xxx = await mongoQuery();
+    //var yyy = await mongoInsert();
+    
+    
+    for(var idx =0; idx<xxx.length; idx++ )
+    {
+        await promise2(xxx[idx].name);
+        await promise2(xxx[idx].address);
+    }
   
+  
+  
+  
+   await replyYesNoTemplate(clientBot_2, req.body.events[0].replyToken, message, "qq");
   /*
   var xxx = await mongoQuery();
     //var yyy = await mongoInsert();
