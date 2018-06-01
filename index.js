@@ -288,7 +288,7 @@ app.post('/callback', async (req, res) => {
     
     for(var idx =0; idx<xxx.length; idx++ )
     {
-        await promise1(xxx[idx].name);
+        await promise2(xxx[idx].name);
         await promise2(xxx[idx].address);
     }
   
