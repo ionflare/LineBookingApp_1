@@ -264,12 +264,41 @@ function mongoQuery() {
 
 
 
+function replyYesNoTemplate(client,replyToken, returnStr,postBackStr) {
+
+   return new Promise( ( resolve, reject ) => {
+      client.replyMessage(replyToken, {
+  type: 'template',
+  altText: 'this is a confirm template',
+  template: {
+    type: 'confirm',
+    text: returnStr,
+    actions: [{
+      type: 'postback',
+      label: 'Yes',
+      data: postBackStr
+    }, {
+      type: 'message',
+      label: 'No',
+      text: 'no'
+    }]
+  }
+ });
+        
+  } );
+}
 
 
 
+const lineBot = require('@line/bot-sdk');
+const Client = require('@line/bot-sdk').Client;
 
 
 
+const clientBot_2 = new Client({
+  channelAccessToken:  process.env.CHANNEL_ACCESS_TOKEN2,
+  channelSecret: process.env.CHANNEL_SECRET2
+});
 
 
 
@@ -281,7 +310,9 @@ app.use(bodyParser.urlencoded({
 
 app.post('/callback', async (req, res) => {
  
+  await replyYesNoTemplate(clientBot_2, req.body.events[0].replyToken, "ee", "qq");
   
+  /*
   var xxx = await mongoQuery();
     //var yyy = await mongoInsert();
     
@@ -313,9 +344,19 @@ app.post('/callback', async (req, res) => {
   await request(options, (err, response, body) => {
     console.log(JSON.stringify(response))
   })
+  
+  
+  
   await res.send('OK')
+  */
+  
+  
+  
+  
+  
 })
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('server starting on PORT:' + process.env.PORT)
 })
+
