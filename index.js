@@ -296,8 +296,8 @@ const Client = require('@line/bot-sdk').Client;
 
 
 const clientBot_2 = new Client({
-  channelAccessToken:  process.env.CHANNEL_ACCESS_TOKEN2,
-  channelSecret: process.env.CHANNEL_SECRET2
+  channelAccessToken:  '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU=',
+  channelSecret: 'cb7cdb67c6a8f02f2b7119365518108b'
 });
 
 
