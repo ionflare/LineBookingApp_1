@@ -291,8 +291,8 @@ function replyYesNoTemplate(client,replyToken, returnStr,postBackStr) {
     type: "location",
     title: "my location",
     address: "SWP",
-    latitude: 13.8622,
-    longitude: 100.5134
+    latitude: 13.7333,
+    longitude: 100.4833
 
 
   
