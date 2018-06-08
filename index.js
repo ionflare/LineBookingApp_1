@@ -287,16 +287,16 @@ function replyYesNoTemplate(client,replyToken, returnStr,postBackStr) {
   }
   */
   replyToken: replyToken,
-  type: "message",
+  type: 'message',
   source: {
-    type: "user",
-    userId: "U6a0764890cdbb5393b84accb7b37c266"
+    type: 'user',
+    userId: 'U6a0764890cdbb5393b84accb7b37c266'
   },
   message: {
-    id: "325708",
-    type: "location",
-    title: "my location",
-    address: "〒150-0002 東京都渋谷区渋谷２丁目２１−１",
+    id: '325708',
+    type: 'location',
+    title: 'my location',
+    address: '〒150-0002 東京都渋谷区渋谷２丁目２１−１',
     latitude: 35.65910807942215,
     longitude: 139.70372892916203
   }
