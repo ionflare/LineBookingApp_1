@@ -267,7 +267,9 @@ function mongoQuery() {
 function replyYesNoTemplate(client,replyToken, returnStr,postBackStr) {
 
    return new Promise( ( resolve, reject ) => {
-      client.replyMessage(replyToken, {
+      client.replyMessage(replyToken, 
+      {
+          /*
   type: 'template',
   altText: 'this is a confirm template',
   template: {
@@ -283,7 +285,26 @@ function replyYesNoTemplate(client,replyToken, returnStr,postBackStr) {
       text: 'no'
     }]
   }
- });
+  */
+
+  type: "message",
+  timestamp: 1462629479859,
+  source: {
+    type: "user",
+    userId: "U6a0764890cdbb5393b84accb7b37c266"
+  },
+  message: {
+    id: "325708",
+    type: "location",
+    title: "my location",
+    address: "〒150-0002 東京都渋谷区渋谷２丁目２１−１",
+    latitude: 35.65910807942215,
+    longitude: 139.70372892916203
+  }
+  
+  
+ }
+ );
         
   } );
 }
