@@ -324,7 +324,7 @@ function replyText(client,replyToken, returnStr,postBackStr) {
 }
 
 
-function replyDistanceKm(lati,long) {
+function CalDistanceKm(lati,long) {
 
    return new Promise( ( resolve, reject ) => {
          message = getDistanceFromLatLonInKm(lati,long, 13.904381, 100.529984);
@@ -390,8 +390,8 @@ app.post('/callback', async (req, res) => {
     }
   
   
-   await replyDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
-   await replyText(clientBot_2, message , "qq");
+   await CalDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
+   await replyText(clientBot_2,req.body.events[0].replyToken, message , "qq");
    //await replyMap(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude, req.body.events[0].message.longitude );
    //await replyText(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude + "  " +req.body.events[0].message.longitude , "qq");
   /*
