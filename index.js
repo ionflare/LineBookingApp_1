@@ -215,7 +215,7 @@ var MongoClient = require('mongodb').MongoClient
 //var url = "mongodb://localhost:27017";
 var url = "mongodb://chanon:chanon1234@ds135552.mlab.com:35552/mlabtest";
 
-var message = "Init ";
+var message = "";
 
 var promise1 =(inputText) => new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -302,6 +302,12 @@ function replyMap(client,replyToken, lati,long) {
   } );
 }
 
+
+
+
+
+
+
 function replyText(client,replyToken, returnStr,postBackStr) {
 
    return new Promise( ( resolve, reject ) => {
@@ -316,6 +322,41 @@ function replyText(client,replyToken, returnStr,postBackStr) {
         
   } );
 }
+
+
+function replyDistanceKm(lati,long) {
+
+   return new Promise( ( resolve, reject ) => {
+         message = getDistanceFromLatLonInKm(lati,long, 13.904381, 100.529984);
+         resolve('gg');
+  } );
+}
+
+
+
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+
+
+
+
+
+
 
 
 const lineBot = require('@line/bot-sdk');
@@ -349,9 +390,9 @@ app.post('/callback', async (req, res) => {
     }
   
   
-  
-  
-   await replyMap(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude, req.body.events[0].message.longitude );
+   await replyDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
+   await replyText(clientBot_2, message , "qq");
+   //await replyMap(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude, req.body.events[0].message.longitude );
    //await replyText(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude + "  " +req.body.events[0].message.longitude , "qq");
   /*
   var xxx = await mongoQuery();
