@@ -308,15 +308,9 @@ function replyText(client,replyToken, returnStr,postBackStr) {
       client.replyMessage(replyToken, 
       {
 
-    type: "message",
-    message: {
-    id: "325708",
     type: "text",
     text: "Hello, world!"
-  }
 
-
-  
  }
  );
         
