@@ -309,7 +309,7 @@ function replyText(client,replyToken, returnStr,postBackStr) {
       {
 
     type: "text",
-    text: "Hello, world!"
+    text: returnStr
 
  }
  );
@@ -352,7 +352,7 @@ app.post('/callback', async (req, res) => {
   
   
    //await replyYesNoTemplate(clientBot_2, req.body.events[0].replyToken, message, "qq");
-    await replyText(clientBot_2, req.body.events[0].replyToken, message, "qq");
+    await replyText(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.text, "qq");
   /*
   var xxx = await mongoQuery();
     //var yyy = await mongoInsert();
