@@ -264,7 +264,7 @@ function mongoQuery() {
 
 
 
-function replyYesNoTemplate(client,replyToken, returnStr,postBackStr) {
+function replyMap(client,replyToken, lati,long) {
 
    return new Promise( ( resolve, reject ) => {
       client.replyMessage(replyToken, 
@@ -291,8 +291,8 @@ function replyYesNoTemplate(client,replyToken, returnStr,postBackStr) {
     type: "location",
     title: "my location",
     address: "SWP",
-    latitude: 13.7333,
-    longitude: 100.4833
+    latitude: lati,
+    longitude: long
 
 
   
@@ -351,8 +351,8 @@ app.post('/callback', async (req, res) => {
   
   
   
-   //await replyYesNoTemplate(clientBot_2, req.body.events[0].replyToken, message, "qq");
-    await replyText(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude + "  " +req.body.events[0].message.longitude , "qq");
+   await replyMap(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude, req.body.events[0].message.longitude );
+   //await replyText(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude + "  " +req.body.events[0].message.longitude , "qq");
   /*
   var xxx = await mongoQuery();
     //var yyy = await mongoInsert();
