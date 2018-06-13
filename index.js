@@ -302,6 +302,26 @@ function replyYesNoTemplate(client,replyToken, returnStr,postBackStr) {
   } );
 }
 
+function replyText(client,replyToken, returnStr,postBackStr) {
+
+   return new Promise( ( resolve, reject ) => {
+      client.replyMessage(replyToken, 
+      {
+
+    type: "message",
+    message: {
+    id: "325708",
+    type: "text",
+    text: "Hello, world!"
+  }
+
+
+  
+ }
+ );
+        
+  } );
+}
 
 
 const lineBot = require('@line/bot-sdk');
@@ -337,7 +357,8 @@ app.post('/callback', async (req, res) => {
   
   
   
-   await replyYesNoTemplate(clientBot_2, req.body.events[0].replyToken, message, "qq");
+   //await replyYesNoTemplate(clientBot_2, req.body.events[0].replyToken, message, "qq");
+    await replyText(clientBot_2, req.body.events[0].replyToken, message, "qq");
   /*
   var xxx = await mongoQuery();
     //var yyy = await mongoInsert();
