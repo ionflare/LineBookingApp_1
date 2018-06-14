@@ -362,7 +362,7 @@ function mongoQueryGetLocation() {
     var dbo = db.db("location-line");
     
     //dbo.collection("customers").findOne({}, function(err, result) {
-    dbo.collection("location").find().toArray(function(err, result)
+    dbo.collection("location").find({}).toArray(function(err, result)
     {
     if (err) { return reject( err );}
     else{
@@ -453,9 +453,13 @@ app.post('/callback', async (req, res) => {
     */
   
    var all_Location = await mongoQueryGetLocation();
-   
+    for(var idx =0; idx<all_Location.length; idx++ )
+    {
+        await promise2(xxx[idx].name);
+        //await promise2(xxx[idx].address);
+    }
    //await CalDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
-   await replyText(clientBot_2,req.body.events[0].replyToken, all_Location[0].name , "qq");
+   await replyText(clientBot_2,req.body.events[0].replyToken, message , "qq");
    //await replyMap(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude, req.body.events[0].message.longitude );
    //await replyText(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude + "  " +req.body.events[0].message.longitude , "qq");
  
