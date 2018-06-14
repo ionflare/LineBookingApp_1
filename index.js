@@ -325,7 +325,7 @@ function replyCoro(client,replyToken) {
                     "label": "Buy",
                     "data": "action=buy&itemid=111"});
                     
-       for(var id = 0;id <10; id ++)
+       for(var id = 0;id <20; id ++)
        {
            let newObj = {   
             thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
