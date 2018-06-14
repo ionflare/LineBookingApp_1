@@ -405,11 +405,11 @@ function CalDistanceKm(inputArrayLocation,userLa,userLong) {
        
        for(var idx =0; idx<inputArrayLocation.length; idx++ )
         {    let R = 6371; // Radius of the earth in km
-            let dLat = deg2rad(inputArrayLocation[idx.latitude] - userLa);  // deg2rad below
-            let dLon = deg2rad(inputArrayLocation[idx.longtitude] - userLong); 
+            let dLat = deg2rad(inputArrayLocation[idx].latitude - userLa);  // deg2rad below
+            let dLon = deg2rad(inputArrayLocation[idx].longtitude - userLong); 
             let a = 
             Math.sin(dLat/2) * Math.sin(dLat/2) +
-            Math.cos(deg2rad(userLa)) * Math.cos(deg2rad(inputArrayLocation[idx.latitude])) * 
+            Math.cos(deg2rad(userLa)) * Math.cos(deg2rad(inputArrayLocation[idx].latitude)) * 
             Math.sin(dLon/2) * Math.sin(dLon/2); 
             let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
             var d = R * c; 
