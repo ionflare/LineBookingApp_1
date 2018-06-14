@@ -398,19 +398,29 @@ function replyText(client,replyToken, returnStr,postBackStr) {
 }
 
 
-function CalDistanceKm(lat1,lon1,lat2,lon2) {
+function CalDistanceKm(inputArrayLocation,userLa,userLong) {
 
    return new Promise( ( resolve, reject ) => {
-        let R = 6371; // Radius of the earth in km
-         let dLat = deg2rad(lat2-lat1);  // deg2rad below
-        let dLon = deg2rad(lon2-lon1); 
-         let a = 
+       
+       
+       for(var idx =0; idx<inputArrayLocation.length; idx++ )
+        {    let R = 6371; // Radius of the earth in km
+            let dLat = deg2rad(inputArrayLocation[idx.latitude] - userLa);  // deg2rad below
+            let dLon = deg2rad(inputArrayLocation[idx.longtitude] - userLong); 
+            let a = 
             Math.sin(dLat/2) * Math.sin(dLat/2) +
-            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+            Math.cos(deg2rad(userLa)) * Math.cos(deg2rad(inputArrayLocation[idx.latitude])) * 
             Math.sin(dLon/2) * Math.sin(dLon/2); 
-        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-        let d = R * c; 
-         resolve(d);
+            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            let d = R * c; 
+            (d < 100000)
+            {
+             message = message + inputArrayLocation[idx].name +", d : " + d +" . "; 
+            }
+        }
+        
+     
+         resolve('gg');
   } );
 }
 
@@ -453,19 +463,8 @@ app.post('/callback', async (req, res) => {
    
   
    var all_Location = await mongoQueryGetLocation();
-    for(var idx =0; idx<all_Location.length; idx++ )
-    {   
-       let displacement = await CalDistanceKm(all_Location[idx].latitude ,  all_Location[idx].longtitude , req.body.events[0].message.latitude, req.body.events[0].message.longitude);
-       if( displacement < 1000 ) 
-       {
-           await promise2(all_Location[idx].name +", d : " + displacement +" . " );
-       }
-       else
-       { continue;
-       }
-      
-     
-    }
+   await CalDistanceKm(all_Location , req.body.events[0].message.latitude, req.body.events[0].message.longitude);
+   
    //await CalDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
    await replyText(clientBot_2,req.body.events[0].replyToken, message , "qq");
    //await replyMap(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude, req.body.events[0].message.longitude );
