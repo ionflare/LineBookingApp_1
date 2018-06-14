@@ -545,12 +545,12 @@ app.use(bodyParser.urlencoded({
 
 app.post('/callback', async (req, res) => {
  
-   if(req.body.events[0].type == "text")
+   if(req.body.events[0].message.type == "text")
    {
    
      await replyCoro(clientBot_2,req.body.events[0].replyToken);
    }
-   else if(req.body.events[0].type == "location")
+   else if(req.body.events[0].message.type == "location")
    {
          var all_Location = await mongoQueryGetLocation();
    var ss = await CalDistanceKm(all_Location , req.body.events[0].message.latitude, req.body.events[0].message.longitude);
