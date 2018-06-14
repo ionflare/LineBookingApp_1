@@ -320,6 +320,11 @@ function replyCoro(client,replyToken) {
        let repText ="";
        let col = [];
        let act =[];
+       
+       act.push({"type": "postback",
+                    "label": "Buy",
+                    "data": "action=buy&itemid=111"});
+                    
        for(var id = 0;id <10; id ++)
        {
            let newObj = {   
