@@ -330,7 +330,7 @@ function replyCoro(client,replyToken) {
            let newObj = {   
             thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
             imageBackgroundColor: "#FFFFFF",
-            title: "this is menu ",
+            title: "this is menu "+ id,
             text: "description",
             defaultAction: {
                 type: "uri",
