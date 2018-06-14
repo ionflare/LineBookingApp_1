@@ -467,9 +467,9 @@ app.post('/callback', async (req, res) => {
      
     }
    //await CalDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
-   //await replyText(clientBot_2,req.body.events[0].replyToken, message , "qq");
+   await replyText(clientBot_2,req.body.events[0].replyToken, message , "qq");
    //await replyMap(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude, req.body.events[0].message.longitude );
-   await replyText(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude + "  " +req.body.events[0].message.longitude , "qq");
+   //await replyText(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude + "  " +req.body.events[0].message.longitude , "qq");
  
   
   
