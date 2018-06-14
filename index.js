@@ -413,7 +413,7 @@ function CalDistanceKm(inputArrayLocation,userLa,userLong) {
             Math.sin(dLon/2) * Math.sin(dLon/2); 
             let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
             var d = R * c; 
-            (d < 1000)
+            if(d < 1000)
             {
              message = message + inputArrayLocation[idx].name +", d : " + d +" . "; 
             }
