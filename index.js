@@ -415,10 +415,13 @@ function CalDistanceKm(inputArrayLocation,userLa,userLong) {
             let d = R * c; 
             if(d < 1000)
             {
-             res = res + inputArrayLocation[idx].name +", d : " + d +" . "; 
+             res = res + inputArrayLocation[idx].name +", d : " + d +"km . "; 
             }
         }
-        
+        if(res == "")
+        {
+           res = "No Location was set within 1,000km radius."
+        }
      
          resolve(res);
   } );
