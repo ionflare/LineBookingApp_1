@@ -455,10 +455,13 @@ app.post('/callback', async (req, res) => {
    var all_Location = await mongoQueryGetLocation();
     for(var idx =0; idx<all_Location.length; idx++ )
     {   
-       var displacement = await CalDistanceKm(all_Location[idx].latitude ,  all_Location[idx].longtitude , req.body.events[0].message.latitude, req.body.events[0].message.longitude);
+       let displacement = await CalDistanceKm(all_Location[idx].latitude ,  all_Location[idx].longtitude , req.body.events[0].message.latitude, req.body.events[0].message.longitude);
        if( displacement < 1000 ) 
        {
            await promise2(all_Location[idx].name);
+       }
+       else
+       { continue;
        }
       
      
