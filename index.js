@@ -261,7 +261,8 @@ const app = express()
 
 var MongoClient = require('mongodb').MongoClient
 //var url = "mongodb://localhost:27017";
-var url = "mongodb://chanon:chanon1234@ds135552.mlab.com:35552/mlabtest";
+//var url = "mongodb://chanon:chanon1234@ds135552.mlab.com:35552/mlabtest";
+
 
 var message = "";
 
@@ -350,7 +351,7 @@ function replyMap(client,replyToken, lati,long) {
   } );
 }
 
-
+var url = "mongodb://chanon:chanon1234@ds259620.mlab.com:59620/location-line";
 
 function mongoQueryGetLocation() {
     
