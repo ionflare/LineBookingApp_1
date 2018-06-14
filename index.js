@@ -458,7 +458,7 @@ app.post('/callback', async (req, res) => {
        let displacement = await CalDistanceKm(all_Location[idx].latitude ,  all_Location[idx].longtitude , req.body.events[0].message.latitude, req.body.events[0].message.longitude);
        if( displacement < 1000 ) 
        {
-           await promise2(all_Location[idx].name);
+           await promise2(all_Location[idx].name +", d : " + displacement +" . " );
        }
        else
        { continue;
