@@ -319,20 +319,20 @@ function replyCoro(client,replyToken) {
        
        let repText ="";
        let col = [];
-       
+       let act =[];
        for(var id = 0;id <10; id ++)
        {
            let newObj = {   
             thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
             imageBackgroundColor: "#FFFFFF",
-            title: "this is menu " + id,
+            title: "this is menu ",
             text: "description",
             defaultAction: {
                 type: "uri",
                 label: "View detail",
                 uri: "http://example.com/page/123"
             },
-           actions: [],
+          actions: act,
           imageAspectRatio: "rectangle",
             imageSize: "cover"
            };
@@ -341,7 +341,7 @@ function replyCoro(client,replyToken) {
        }
 
        
-       var message =  {
+       let Repmessage =  {
         type: "template",
         altText: "this is a carousel template",
         template: {
@@ -351,7 +351,7 @@ function replyCoro(client,replyToken) {
        };
        
        
-       client.replyMessage(replyToken, message);
+       client.replyMessage(replyToken, Repmessage);
         resolve('gg');
    
     });
