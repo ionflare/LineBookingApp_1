@@ -312,6 +312,88 @@ function mongoQuery() {
 }    
 
 
+function replyCoro(client,replyToken) {
+    
+   return new Promise( ( resolve, reject ) => {
+      client.replyMessage(replyToken, 
+      {
+ 
+"type": "template",
+  "altText": "this is a carousel template",
+  "template": {
+      "type": "carousel",
+      "columns": [
+          {
+            "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+            "imageBackgroundColor": "#FFFFFF",
+            "title": "this is menu",
+            "text": "description",
+            "defaultAction": {
+                "type": "uri",
+                "label": "View detail",
+                "uri": "http://example.com/page/123"
+            },
+            "actions": [
+                {
+                    "type": "postback",
+                    "label": "Buy",
+                    "data": "action=buy&itemid=111"
+                },
+                {
+                    "type": "postback",
+                    "label": "Add to cart",
+                    "data": "action=add&itemid=111"
+                },
+                {
+                    "type": "uri",
+                    "label": "View detail",
+                    "uri": "http://example.com/page/111"
+                }
+            ]
+          },
+          {
+            "thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
+            "imageBackgroundColor": "#000000",
+            "title": "this is menu",
+            "text": "description",
+            "defaultAction": {
+                "type": "uri",
+                "label": "View detail",
+                "uri": "http://example.com/page/222"
+            },
+            "actions": [
+                {
+                    "type": "postback",
+                    "label": "Buy",
+                    "data": "action=buy&itemid=222"
+                },
+                {
+                    "type": "postback",
+                    "label": "Add to cart",
+                    "data": "action=add&itemid=222"
+                },
+                {
+                    "type": "uri",
+                    "label": "View detail",
+                    "uri": "http://example.com/page/222"
+                }
+            ]
+          }
+      ],
+      "imageAspectRatio": "rectangle",
+      "imageSize": "cover"
+  }
+  
+ }
+ );
+        
+  } );
+
+}
+
+
+
+
 
 function replyMap(client,replyToken, lati,long) {
 
@@ -463,9 +545,14 @@ app.use(bodyParser.urlencoded({
 
 app.post('/callback', async (req, res) => {
  
+   if(req.body.events[0].type == "text")
+   {
    
-  
-   var all_Location = await mongoQueryGetLocation();
+     await replyCoro(clientBot_2,req.body.events[0].replyToken);
+   }
+   else if(req.body.events[0].type == "location")
+   {
+         var all_Location = await mongoQueryGetLocation();
    var ss = await CalDistanceKm(all_Location , req.body.events[0].message.latitude, req.body.events[0].message.longitude);
    
    //await CalDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
@@ -474,6 +561,9 @@ app.post('/callback', async (req, res) => {
    //await replyText(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude + "  " +req.body.events[0].message.longitude , "qq");
  
    ss ="";
+   }
+  
+ 
   
   
   
