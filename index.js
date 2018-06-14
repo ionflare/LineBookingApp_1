@@ -456,7 +456,7 @@ app.post('/callback', async (req, res) => {
    var all_Location = await mongoQueryGetLocation();
     for(var idx =0; idx<all_Location.length; idx++ )
     {
-        await promise2(xxx[idx].name);
+        await promise2(all_Location[idx].name);
         //await promise2(xxx[idx].address);
     }
    //await CalDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
