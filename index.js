@@ -195,10 +195,58 @@ const server_begin =  server.listen(PORT, () => {
 
 blah();    
 */
-
+ /*
+  var xxx = await mongoQuery();
+    //var yyy = await mongoInsert();
+    
+    
+    for(var idx =0; idx<xxx.length; idx++ )
+    {
+        await promise2(xxx[idx].name);
+        await promise2(xxx[idx].address);
+    }
+  
+  
+   const options = {
+    method: 'POST',
+    uri: 'https://api.line.me/v2/bot/message/reply',
+    body: {
+      replyToken: req.body.events[0].replyToken,
+      messages: [{
+        type: 'text',
+        //text: req.body.events[0].message.text // ここに指定した文字列がボットの発言になる
+        text: message // ここに指定した文字列がボットの発言になる
+      }]
+    },
+    auth: {
+      bearer: '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU=' // ここは自分のtokenに書き換える
+    },
+    json: true
+  }
+  
+  await request(options, (err, response, body) => {
+    console.log(JSON.stringify(response))
+  })
+  
+  
+  
+  await res.send('OK')
+  */
+  
 
 // import modules
 
+
+
+const lineBot = require('@line/bot-sdk');
+const Client = require('@line/bot-sdk').Client;
+
+
+
+const clientBot_2 = new Client({
+  channelAccessToken:  '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU=',
+  channelSecret: 'cb7cdb67c6a8f02f2b7119365518108b'
+});
 
 
 
@@ -304,8 +352,33 @@ function replyMap(client,replyToken, lati,long) {
 
 
 
+function mongoQueryGetLocation() {
+    
+    return new Promise( ( resolve, reject ) => {
+   
+     MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    //var dbo = db.db("mydb");
+    var dbo = db.db("location-line");
+    
+    //dbo.collection("customers").findOne({}, function(err, result) {
+    dbo.collection("location").find().toArray(function(err, result)
+    {
+    if (err) { return reject( err );}
+    else{
+        
+        //getDistanceFromLatLonInKm(lati,long, 13.904381, 100.529984);
+        resolve(result);
+  
+    }
 
-
+    db.close();
+    });
+    });
+   
+  });
+  
+}    
 
 
 function replyText(client,replyToken, returnStr,postBackStr) {
@@ -359,17 +432,6 @@ function deg2rad(deg) {
 
 
 
-const lineBot = require('@line/bot-sdk');
-const Client = require('@line/bot-sdk').Client;
-
-
-
-const clientBot_2 = new Client({
-  channelAccessToken:  '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU=',
-  channelSecret: 'cb7cdb67c6a8f02f2b7119365518108b'
-});
-
-
 
 
 app.use(bodyParser.json()) // for parsing application/json
@@ -379,59 +441,24 @@ app.use(bodyParser.urlencoded({
 
 app.post('/callback', async (req, res) => {
  
-    var xxx = await mongoQuery();
+    //var xxx = await mongoQuery();
     //var yyy = await mongoInsert();
     
-    
+    /*
     for(var idx =0; idx<xxx.length; idx++ )
     {
         await promise2(xxx[idx].name);
         await promise2(xxx[idx].address);
     }
+    */
   
-  
-   await CalDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
-   await replyText(clientBot_2,req.body.events[0].replyToken, message , "qq");
+   var all_Location = await mongoQueryGetLocation();
+   
+   //await CalDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
+   await replyText(clientBot_2,req.body.events[0].replyToken, all_Location[0].name , "qq");
    //await replyMap(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude, req.body.events[0].message.longitude );
    //await replyText(clientBot_2, req.body.events[0].replyToken, req.body.events[0].message.latitude + "  " +req.body.events[0].message.longitude , "qq");
-  /*
-  var xxx = await mongoQuery();
-    //var yyy = await mongoInsert();
-    
-    
-    for(var idx =0; idx<xxx.length; idx++ )
-    {
-        await promise2(xxx[idx].name);
-        await promise2(xxx[idx].address);
-    }
-  
-  
-   const options = {
-    method: 'POST',
-    uri: 'https://api.line.me/v2/bot/message/reply',
-    body: {
-      replyToken: req.body.events[0].replyToken,
-      messages: [{
-        type: 'text',
-        //text: req.body.events[0].message.text // ここに指定した文字列がボットの発言になる
-        text: message // ここに指定した文字列がボットの発言になる
-      }]
-    },
-    auth: {
-      bearer: '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU=' // ここは自分のtokenに書き換える
-    },
-    json: true
-  }
-  
-  await request(options, (err, response, body) => {
-    console.log(JSON.stringify(response))
-  })
-  
-  
-  
-  await res.send('OK')
-  */
-  
+ 
   
   
   
