@@ -398,11 +398,19 @@ function replyText(client,replyToken, returnStr,postBackStr) {
 }
 
 
-function CalDistanceKm(lati,long) {
+function CalDistanceKm(lat1,lon1,lat2,lon2) {
 
    return new Promise( ( resolve, reject ) => {
-         message = getDistanceFromLatLonInKm(lati,long, 13.904381, 100.529984);
-         resolve('gg');
+        var R = 6371; // Radius of the earth in km
+         var dLat = deg2rad(lat2-lat1);  // deg2rad below
+        var dLon = deg2rad(lon2-lon1); 
+         var a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2); 
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        var d = R * c; 
+         resolve(d);
   } );
 }
 
@@ -442,22 +450,18 @@ app.use(bodyParser.urlencoded({
 
 app.post('/callback', async (req, res) => {
  
-    //var xxx = await mongoQuery();
-    //var yyy = await mongoInsert();
-    
-    /*
-    for(var idx =0; idx<xxx.length; idx++ )
-    {
-        await promise2(xxx[idx].name);
-        await promise2(xxx[idx].address);
-    }
-    */
+   
   
    var all_Location = await mongoQueryGetLocation();
     for(var idx =0; idx<all_Location.length; idx++ )
-    {
-        await promise2(all_Location[idx].name);
-        //await promise2(xxx[idx].address);
+    {   
+       var displacement = await CalDistanceKm(all_Location[idx].latitude ,  all_Location[idx].longitude , req.body.events[0].message.latitude, req.body.events[0].message.longitude);
+       if( displacement < 10 ) 
+       {
+            promise2(all_Location[idx].name);
+       }
+      
+     
     }
    //await CalDistanceKm( req.body.events[0].message.latitude, req.body.events[0].message.longitude);
    await replyText(clientBot_2,req.body.events[0].replyToken, message , "qq");
