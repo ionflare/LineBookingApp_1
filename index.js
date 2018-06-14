@@ -315,9 +315,60 @@ function mongoQuery() {
 function replyCoro(client,replyToken) {
     
    return new Promise( ( resolve, reject ) => {
+       
+       
+       let repText ="";
+       let col = [];
+       
+       for(var id = 0;id <10; id ++)
+       {
+           let newObj = {   
+            thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
+            imageBackgroundColor: "#FFFFFF",
+            title: "this is menu " + id,
+            text: "description",
+            defaultAction: {
+                type: "uri",
+                label: "View detail",
+                uri: "http://example.com/page/123"
+            },
+           actions: [],
+          imageAspectRatio: "rectangle",
+            imageSize: "cover"
+           };
+           
+          col.push(newObj);
+       }
+
+       
+       var message =  {
+        type: "template",
+        altText: "this is a carousel template",
+        template: {
+        type: "carousel",
+        columns: col
+        }
+       };
+       
+       
+       client.replyMessage(replyToken, message);
+        resolve('gg');
+   
+    });
+}
+       
+       
+       
+       
+       
+  /*     
+       
       client.replyMessage(replyToken, 
       {
- 
+            for(var i =0; i< 10;i++)
+            {
+                
+            }
 "type": "template",
   "altText": "this is a carousel template",
   "template": {
@@ -390,7 +441,7 @@ function replyCoro(client,replyToken) {
   } );
 
 }
-
+*/
 
 
 
