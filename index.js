@@ -333,7 +333,7 @@ function replyCoro(client,replyToken) {
             title: "this is menu "+ id,
             text: "description",
             defaultAction: {
-                type: "url",
+                type: "uri",
                 label: "View detail",
                // uri: "http://example.com/page/123"
                 uri: "line://nv/camera/"
