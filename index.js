@@ -333,9 +333,10 @@ function replyCoro(client,replyToken) {
             title: "this is menu "+ id,
             text: "description",
             defaultAction: {
-                type: "uri",
+                type: "url",
                 label: "View detail",
-                uri: "http://example.com/page/123"
+               // uri: "http://example.com/page/123"
+                uri: "line://nv/camera/"
             },
           actions: act,
           imageAspectRatio: "rectangle",
@@ -584,7 +585,6 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
-
 
 
 
