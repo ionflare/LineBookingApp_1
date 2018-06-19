@@ -334,9 +334,9 @@ function replyCoro(client,replyToken) {
             },
             "actions": [
                 {
-                   "type": "uri",
-                    "label": "Buy",
-                    "data": "action=buy&itemid=111"
+                    "type": "uri",
+                    "label": "friend",
+                    "uri": "line://nv/addFriends"
                 },
                 {
                     "type": "postback",
