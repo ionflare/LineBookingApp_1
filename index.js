@@ -315,8 +315,84 @@ function mongoQuery() {
 function replyCoro(client,replyToken) {
     
    return new Promise( ( resolve, reject ) => {
+        client.replyMessage(replyToken, 
+      {
+"type": "template",
+  "altText": "this is a carousel template",
+  "template": {
+      "type": "carousel",
+      "columns": [
+          {
+            "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+            "imageBackgroundColor": "#FFFFFF",
+            "title": "this is menu",
+            "text": "description",
+            "defaultAction": {
+                "type": "uri",
+                "label": "View detail",
+                "uri": "http://example.com/page/123"
+            },
+            "actions": [
+                {
+                    "type": "postback",
+                    "label": "Buy",
+                    "data": "action=buy&itemid=111"
+                },
+                {
+                    "type": "postback",
+                    "label": "Add to cart",
+                    "data": "action=add&itemid=111"
+                },
+                {
+                    "type": "uri",
+                    "label": "View detail",
+                    "uri": "http://example.com/page/111"
+                }
+            ]
+          },
+          {
+            "thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
+            "imageBackgroundColor": "#000000",
+            "title": "this is menu",
+            "text": "description",
+            "defaultAction": {
+                "type": "uri",
+                "label": "View detail",
+                "uri": "http://example.com/page/222"
+            },
+            "actions": [
+                {
+                    "type": "postback",
+                    "label": "Buy",
+                    "data": "action=buy&itemid=222"
+                },
+                {
+                    "type": "postback",
+                    "label": "Add to cart",
+                    "data": "action=add&itemid=222"
+                },
+                {
+                    "type": "uri",
+                    "label": "View detail",
+                    "uri": "http://example.com/page/222"
+                }
+            ]
+          }
+      ],
+      "imageAspectRatio": "rectangle",
+      "imageSize": "cover"
+  }
+ }
+ );
+         resolve('gg');
+  } );
+
        
        
+       
+       
+       
+       /*
        let repText ="";
        let col = [];
        let act =[];
@@ -329,7 +405,9 @@ function replyCoro(client,replyToken) {
        {
            
            
-          let newObj = {   
+           if(id%2==0)
+           {
+                let newObj = {   
             thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
             imageBackgroundColor: "#FFFFFF",
             title: "this is menu "+ id,
@@ -346,6 +424,28 @@ function replyCoro(client,replyToken) {
            };
            
           col.push(newObj);
+           }
+           else
+           {
+                 let newObj = {   
+            thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
+            imageBackgroundColor: "#FFFFFF",
+            title: "this is menu "+ id,
+            text: "description",
+            defaultAction: {
+                type: "uri",
+                label: "View detail",
+               // uri: "http://example.com/page/123"
+                uri: "line://nv/p[[/"
+            },
+          actions: act,
+          imageAspectRatio: "rectangle",
+            imageSize: "cover"
+           };
+           
+          col.push(newObj);
+           }
+          
        }
 
        
@@ -363,6 +463,7 @@ function replyCoro(client,replyToken) {
         resolve('gg');
    
     });
+    */
 }
        
        
