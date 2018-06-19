@@ -312,6 +312,41 @@ function mongoQuery() {
 }    
 
 
+
+
+function replyLIFF() {
+     return new Promise( ( resolve, reject ) => {
+            var headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + 'Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
+            }
+            var body = {
+                view: {
+                     type: 'compact',
+                     url: 'https://test-liff-1.herokuapp.com/'
+                }
+            }
+                
+            var url = 'https://api.line.me/liff/v1/apps';
+            request({
+                url: url,
+                method: 'POST',
+                headers: headers,
+                body: body,
+                json: true
+            });
+            
+             resolve('gg');
+            
+     });
+    
+}
+
+
+
+
+
+
 function replyCoro(client,replyToken) {
     
    return new Promise( ( resolve, reject ) => {
@@ -327,7 +362,11 @@ function replyCoro(client,replyToken) {
                     
        for(var id = 0;id <10; id ++)
        {
-           let newObj = {   
+           
+           
+           if(id%2==0)
+           {
+                let newObj = {   
             thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
             imageBackgroundColor: "#FFFFFF",
             title: "this is menu "+ id,
@@ -336,7 +375,7 @@ function replyCoro(client,replyToken) {
                 type: "uri",
                 label: "View detail",
                // uri: "http://example.com/page/123"
-                uri: "line://nv/camera/"
+                uri: "line://nv/p[[/"
             },
           actions: act,
           imageAspectRatio: "rectangle",
@@ -344,6 +383,28 @@ function replyCoro(client,replyToken) {
            };
            
           col.push(newObj);
+           }
+           else
+           {
+                 let newObj = {   
+            thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
+            imageBackgroundColor: "#FFFFFF",
+            title: "this is menu "+ id,
+            text: "description",
+            defaultAction: {
+                type: "uri",
+                label: "View detail",
+               // uri: "http://example.com/page/123"
+                uri: "line://nv/p[[/"
+            },
+          actions: act,
+          imageAspectRatio: "rectangle",
+            imageSize: "cover"
+           };
+           
+          col.push(newObj);
+           }
+          
        }
 
        
@@ -363,94 +424,6 @@ function replyCoro(client,replyToken) {
     });
 }
        
-       
-       
-       
-       
-  /*     
-       
-      client.replyMessage(replyToken, 
-      {
-            for(var i =0; i< 10;i++)
-            {
-                
-            }
-"type": "template",
-  "altText": "this is a carousel template",
-  "template": {
-      "type": "carousel",
-      "columns": [
-          {
-            "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
-            "imageBackgroundColor": "#FFFFFF",
-            "title": "this is menu",
-            "text": "description",
-            "defaultAction": {
-                "type": "uri",
-                "label": "View detail",
-                "uri": "http://example.com/page/123"
-            },
-            "actions": [
-                {
-                    "type": "postback",
-                    "label": "Buy",
-                    "data": "action=buy&itemid=111"
-                },
-                {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data": "action=add&itemid=111"
-                },
-                {
-                    "type": "uri",
-                    "label": "View detail",
-                    "uri": "http://example.com/page/111"
-                }
-            ]
-          },
-          {
-            "thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
-            "imageBackgroundColor": "#000000",
-            "title": "this is menu",
-            "text": "description",
-            "defaultAction": {
-                "type": "uri",
-                "label": "View detail",
-                "uri": "http://example.com/page/222"
-            },
-            "actions": [
-                {
-                    "type": "postback",
-                    "label": "Buy",
-                    "data": "action=buy&itemid=222"
-                },
-                {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data": "action=add&itemid=222"
-                },
-                {
-                    "type": "uri",
-                    "label": "View detail",
-                    "uri": "http://example.com/page/222"
-                }
-            ]
-          }
-      ],
-      "imageAspectRatio": "rectangle",
-      "imageSize": "cover"
-  }
-  
- }
- );
-        
-  } );
-
-}
-*/
-
-
-
 
 function replyMap(client,replyToken, lati,long) {
 
@@ -604,7 +577,9 @@ app.post('/callback', async (req, res) => {
    if(req.body.events[0].message.type == "text")
    {
    
-     await replyCoro(clientBot_2,req.body.events[0].replyToken);
+     //await replyCoro(clientBot_2,req.body.events[0].replyToken);
+     
+     await replyLIFF();
    }
    else if(req.body.events[0].message.type == "location")
    {
