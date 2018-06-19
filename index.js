@@ -315,7 +315,7 @@ function mongoQuery() {
 
 
 function replyLIFF() {
-     return new Promise( ( resolve, reject ) => {
+    
             var headers = {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + 'Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
@@ -335,10 +335,6 @@ function replyLIFF() {
                 body: body,
                 json: true
             });
-            
-             resolve('gg');
-            
-     });
     
 }
 
@@ -389,13 +385,13 @@ function replyCoro(client,replyToken) {
                  let newObj = {   
             thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
             imageBackgroundColor: "#FFFFFF",
-            title: "this is menu "+ id,
+            title: "Test LIFF "+ id,
             text: "description",
             defaultAction: {
                 type: "uri",
                 label: "View detail",
                // uri: "http://example.com/page/123"
-                uri: "line://nv/p[[/"
+                uri: "https://api.line.me/liff/v1/apps"
             },
           actions: act,
           imageAspectRatio: "rectangle",
@@ -577,9 +573,8 @@ app.post('/callback', async (req, res) => {
    if(req.body.events[0].message.type == "text")
    {
    
-     //await replyCoro(clientBot_2,req.body.events[0].replyToken);
+     await replyCoro(clientBot_2,req.body.events[0].replyToken);
      
-     await replyLIFF();
    }
    else if(req.body.events[0].message.type == "location")
    {
