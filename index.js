@@ -329,9 +329,7 @@ function replyCoro(client,replyToken) {
        {
            
            
-           if(id%2==0)
-           {
-                let newObj = {   
+          let newObj = {   
             thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
             imageBackgroundColor: "#FFFFFF",
             title: "this is menu "+ id,
@@ -348,28 +346,6 @@ function replyCoro(client,replyToken) {
            };
            
           col.push(newObj);
-           }
-           else
-           {
-                 let newObj = {   
-            thumbnailImageUrl: "https://example.com/bot/images/item1.jpg",
-            imageBackgroundColor: "#FFFFFF",
-            title: "this is menu "+ id,
-            text: "description",
-            defaultAction: {
-                type: "uri",
-                label: "View detail",
-               // uri: "http://example.com/page/123"
-                uri: "line://nv/p[[/"
-            },
-          actions: act,
-          imageAspectRatio: "rectangle",
-            imageSize: "cover"
-           };
-           
-          col.push(newObj);
-           }
-          
        }
 
        
