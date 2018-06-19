@@ -339,9 +339,9 @@ function replyCoro(client,replyToken) {
                     "uri": "line://nv/addFriends"
                 },
                 {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data": "line://nv/addFriends"
+                   "type": "uri",
+                    "label": "Open QR Code reader",
+                    "uri": "line://nv/QRCodeReader"
                 },
                 {
                     "type": "uri",
