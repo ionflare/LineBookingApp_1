@@ -334,14 +334,14 @@ function replyCoro(client,replyToken) {
             },
             "actions": [
                 {
-                    "type": "postback",
+                   "type": "uri",
                     "label": "Buy",
                     "data": "action=buy&itemid=111"
                 },
                 {
                     "type": "postback",
                     "label": "Add to cart",
-                    "data": "action=add&itemid=111"
+                    "data": "line://nv/addFriends"
                 },
                 {
                     "type": "uri",
