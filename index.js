@@ -339,14 +339,14 @@ function replyCoro(client,replyToken) {
                     "data": "action=buy&itemid=111"
                 },
                 {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data": "action=add&itemid=111"
+                    "type": "uri",
+                    "label": "Open Camera",
+                    "uri": "line://nv/camera/"
                 },
                 {
                     "type": "uri",
                     "label": "View detail",
-                    "uri": "http://example.com/page/111"
+                    "uri": "https://test-liff-1.herokuapp.com/"
                 }
             ]
           },
@@ -367,14 +367,14 @@ function replyCoro(client,replyToken) {
                     "data": "action=buy&itemid=222"
                 },
                 {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data": "action=add&itemid=222"
+                     "type": "uri",
+                    "label": "View detail",
+                    "uri": "line://nv/camera/"
                 },
                 {
                     "type": "uri",
-                    "label": "View detail",
-                    "uri": "http://example.com/page/222"
+                    "label": "Line Frontend Framework",
+                    "uri": "https://test-liff-1.herokuapp.com/"
                 }
             ]
           }
