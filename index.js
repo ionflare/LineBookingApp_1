@@ -695,8 +695,35 @@ function deg2rad(deg) {
 
 
 
-
-
+function getLIFF(){
+      return new Promise( ( resolve, reject ) => {
+        var headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
+            }
+            
+            var body = {
+            }
+            var url = 'https://api.line.me/liff/v1/apps';
+            request({
+                url: url,
+                method: 'GET',
+                headers: headers,
+                body: body,
+                json: true
+            },function (error, response, body){
+               if (!error) {
+                   resolve(response.statusCode);
+                   
+               }
+            });
+      });
+          
+      
+    
+    
+      
+}
 
 
 function deployLIFF(){
@@ -819,17 +846,8 @@ app.post('/callback', async (req, res) => {
        else if(req.body.events[0].message.text == "Liff")
        {
            
-           const options = {
-             method: 'GET',
-             uri: 'https://api.line.me/liff/v1/apps',
-            header:{
-            'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
-            },
-            body: { }
-           };
-          await request(options, (err, response, body) => {
-               replyText(clientBot_2, req.body.events[0].replyToken,  response.apps[0].liffId, "qq");
-            })
+          var status_code = await getLIFF();
+        await replyText(clientBot_2, req.body.events[0].replyToken,  status_code, "qq");
             
        }
        
