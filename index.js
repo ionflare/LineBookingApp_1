@@ -339,7 +339,7 @@ function replyCoro(client,replyToken) {
                 {
                     "type": "uri",
                     "label": "Liff",
-                    "uri": "line://app/1550488155-XGkb79Jg"
+                    "uri": "line://app/1550488155-yd60LmP5"
                 },
                 {
                    "type": "uri",
