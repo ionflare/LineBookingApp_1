@@ -703,7 +703,7 @@ function deployLIFF(){
     
        return new Promise( ( resolve, reject ) => {
 
-             var stro ="";
+             var stro ="sss";
              
             var headers = {
                 'Content-Type': 'application/json',
@@ -724,11 +724,7 @@ function deployLIFF(){
                 headers: headers,
                 body: body,
                 json: true
-            },(err, response, body) => {
-              //stro =  body;
-             stro = "OK";
-            }
-            );
+            });
             
             
              resolve(stro);
