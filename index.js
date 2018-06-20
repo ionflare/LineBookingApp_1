@@ -703,6 +703,36 @@ function deployLIFF(){
     
        return new Promise( ( resolve, reject ) => {
 
+             var stro ="";
+             
+            var headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
+            }
+            
+            var body = {
+              
+                messages: [{
+                    type: 'tall',
+                    url: 'https://test-liff-1.herokuapp.com/'
+                }]
+            }
+            var url = 'https://api.line.me/liff/v1/apps';
+            request({
+                url: url,
+                method: 'POST',
+                headers: headers,
+                body: body,
+                json: true
+            },(err, response, body) => {
+              //stro =  body;
+             stro = "OK";
+            }
+            );
+            
+            
+             resolve(stro);
+            /*
              var options1 = {
              method: 'POST',
              url: 'https://api.line.me/liff/v1/apps',
@@ -731,6 +761,7 @@ function deployLIFF(){
               }
                resolve(stro);
             })
+            */
   });
  
   
