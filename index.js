@@ -724,10 +724,15 @@ function deployLIFF(){
                 headers: headers,
                 body: body,
                 json: true
-            });
+            },function (error, response, body){
+                
+                stro = body.liffId;
+                 resolve(stro);
+            }
+            );
             
             
-             resolve(stro);
+            
             /*
              var options1 = {
              method: 'POST',
