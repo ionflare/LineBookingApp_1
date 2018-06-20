@@ -339,7 +339,7 @@ function replyCoro(client,replyToken) {
                 {
                     "type": "uri",
                     "label": "Liff",
-                    "uri": "line://app/1550488155-Q4jXeM3k"
+                    "uri": "line://app/1550488155-OAeG7kPv"
                 },
                 {
                    "type": "uri",
@@ -718,12 +718,11 @@ function getLIFF(){
                }
             });
       });
-          
-      
-    
-    
-      
 }
+
+
+
+
 
 
 function deployLIFF(){
