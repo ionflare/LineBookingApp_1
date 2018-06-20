@@ -312,6 +312,9 @@ function mongoQuery() {
 }    
 
 
+
+
+
 function replyCoro(client,replyToken) {
     
    return new Promise( ( resolve, reject ) => {
@@ -696,6 +699,35 @@ function deg2rad(deg) {
 
 
 
+function deployLIFF(){
+    
+       return new Promise( ( resolve, reject ) => {
+
+                 
+  
+        
+        //getDistanceFromLatLonInKm(lati,long, 13.904381, 100.529984);
+        resolve('gg');
+  
+ 
+   
+  });
+ 
+  
+  await request(options, (err, response, body) => {
+    console.log(JSON.stringify(response))
+  })
+  
+  
+  
+  await res.send('OK')
+}
+
+
+
+
+
+
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({
@@ -706,8 +738,82 @@ app.post('/callback', async (req, res) => {
  
    if(req.body.events[0].message.type == "text")
    {
+       if(req.body.events[0].message..text == "Creliff")
+       {
+           
+             var headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
+            }
+            var body = {
+                
+                view: [{
+                    type: 'tall',
+                    url: 'https://test-liff-1.herokuapp.com/'
+                }]
+            }
+            var url = 'https://api.line.me/liff/v1/apps';
+            await request({
+                url: url,
+                method: 'POST',
+                headers: headers,
+                body: body,
+                json: true
+            });
+           
+           
+           //=================
+           /*
+            const options = {
+             method: 'POST',
+             uri: 'https://api.line.me/liff/v1/apps',
+             
+            header:{
+            
+            }, 
+             
+            body: {
+                view: {
+                    type: 'tall',
+                    url:  'https://test-liff-1.herokuapp.com/'
+                        }
+                }
+            auth: {
+            bearer: '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU=' // ここは自分のtokenに書き換える
+            },
+                json: true
+            }
+             await request(options, (err, response, body) => {
+                console.log(JSON.stringify(response.liffId))
+            })
+            */
+            
+            
+       }
+       
+       else if(req.body.events[0].message..text == "Liff")
+       {
+           
+           const options = {
+             method: 'GET',
+             uri: 'https://api.line.me/liff/v1/apps',
+            header:{
+            'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
+            },
+            body = { }
+           };
+            await request(options, (err, response, body) => {
+               replyText(clientBot_2, req.body.events[0].replyToken,  response.apps[0].liffId, "qq");
+            })
+            
+       }
+       
+       else
+       {
+            await replyCoro(clientBot_2,req.body.events[0].replyToken);
+       }
    
-     await replyCoro(clientBot_2,req.body.events[0].replyToken);
+    
    }
    else if(req.body.events[0].message.type == "location")
    {
