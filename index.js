@@ -338,8 +338,8 @@ function replyCoro(client,replyToken) {
             "actions": [
                 {
                     "type": "uri",
-                    "label": "friend",
-                    "uri": "line://nv/addFriends"
+                    "label": "Liff",
+                    "uri": "line://app/1550488155-Q4jXeM3k"
                 },
                 {
                    "type": "uri",
