@@ -698,7 +698,7 @@ function deg2rad(deg) {
 
 
 
-
+/*
 function deployLIFF(){
     
        return new Promise( ( resolve, reject ) => {
@@ -722,7 +722,7 @@ function deployLIFF(){
   
   await res.send('OK')
 }
-
+*/
 
 
 
@@ -738,7 +738,7 @@ app.post('/callback', async (req, res) => {
  
    if(req.body.events[0].message.type == "text")
    {
-       if(req.body.events[0].message..text == "Creliff")
+       if(req.body.events[0].message.text == "Creliff")
        {
            
              var headers = {
@@ -760,38 +760,9 @@ app.post('/callback', async (req, res) => {
                 body: body,
                 json: true
             });
-           
-           
-           //=================
-           /*
-            const options = {
-             method: 'POST',
-             uri: 'https://api.line.me/liff/v1/apps',
-             
-            header:{
-            
-            }, 
-             
-            body: {
-                view: {
-                    type: 'tall',
-                    url:  'https://test-liff-1.herokuapp.com/'
-                        }
-                }
-            auth: {
-            bearer: '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU=' // ここは自分のtokenに書き換える
-            },
-                json: true
-            }
-             await request(options, (err, response, body) => {
-                console.log(JSON.stringify(response.liffId))
-            })
-            */
-            
-            
        }
        
-       else if(req.body.events[0].message..text == "Liff")
+       else if(req.body.events[0].message.text == "Liff")
        {
            
            const options = {
@@ -800,7 +771,7 @@ app.post('/callback', async (req, res) => {
             header:{
             'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
             },
-            body = { }
+            body: { }
            };
             await request(options, (err, response, body) => {
                replyText(clientBot_2, req.body.events[0].replyToken,  response.apps[0].liffId, "qq");
