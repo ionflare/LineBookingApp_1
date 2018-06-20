@@ -698,31 +698,44 @@ function deg2rad(deg) {
 
 
 
-/*
+
 function deployLIFF(){
     
        return new Promise( ( resolve, reject ) => {
 
-                 
+             var options1 = {
+             method: 'POST',
+             uri: 'https://api.line.me/liff/v1/apps',
+             header:{
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
+            },
+            body: {
+                view: {
+                    type: 'tall',
+                    url: 'https://test-liff-1.herokuapp.com/'
+                }
+            }
+           };
+           
+           var stro ="";
+           request(options1, (err, response, body) => {
+              stro =  response.liffId;
+            });
+           
   
         
-        //getDistanceFromLatLonInKm(lati,long, 13.904381, 100.529984);
-        resolve('gg');
+       
+        resolve(stro);
   
  
    
   });
  
   
-  await request(options, (err, response, body) => {
-    console.log(JSON.stringify(response))
-  })
-  
-  
-  
-  await res.send('OK')
+
 }
-*/
+
 
 
 
@@ -741,27 +754,8 @@ app.post('/callback', async (req, res) => {
        if(req.body.events[0].message.text == "Creliff")
        {
            
-              var options1 = {
-             method: 'POST',
-             uri: 'https://api.line.me/liff/v1/apps',
-             header:{
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
-            },
-            body: {
-                view: {
-                    type: 'tall',
-                    url: 'https://test-liff-1.herokuapp.com/'
-                }
-            }
-           };
-           
-           var stro ="";
-           await request(options1, (err, response, body) => {
-              stro =  response.liffId;
-            });
-           
-            await replyText(clientBot_2, req.body.events[0].replyToken,  stro, "qq");
+           var testliff = await deployLIFF();
+           await replyText(clientBot_2, req.body.events[0].replyToken,  testliff, "qq");
            /*
              var headers = {
                 'Content-Type': 'application/json',
