@@ -739,10 +739,10 @@ function deployLIFF(){
             
             var body = {
               
-                messages: [{
+                view: {
                     type: 'tall',
                     url: 'https://test-liff-1.herokuapp.com/'
-                }]
+                }
             }
             var url = 'https://api.line.me/liff/v1/apps';
             request({
@@ -753,47 +753,11 @@ function deployLIFF(){
                 json: true
             },function (error, response, body){
                 if (!error) {
-                      stro = body.liffId;
-                      resolve(body);
-                }
-                else{
-                    reject("Failed");
-                }
-            }
-            );
-            
-            
-            
-            /*
-             var options1 = {
-             method: 'POST',
-             url: 'https://api.line.me/liff/v1/apps',
-             header:{
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
-            },
-            body: {
-                view: {
-                    type: 'tall',
-                    url: 'https://test-liff-1.herokuapp.com/'
-                }
-            }
-           };
-           
-           var stro ="";
-           request(options1, (err, response, body) => {
-              //stro =  body;
-              if(!err)
-              {
-               stro ="OK";
-              }
-              else
-              {
-                stro ="Not OK";
-              }
-               resolve(stro);
-            })
-            */
+                   resolve(response.statusCode);
+                   
+               }
+            });
+      
   });
  
   
