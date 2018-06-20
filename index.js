@@ -811,7 +811,7 @@ app.post('/callback', async (req, res) => {
        {
            
           var Liffbody = await getLIFF();
-        await replyText(clientBot_2, req.body.events[0].replyToken,  Liffbody[0].liffId, "qq");
+        await replyText(clientBot_2, req.body.events[0].replyToken,  Liffbody.apps[0].liffId, "qq");
             
        }
        
