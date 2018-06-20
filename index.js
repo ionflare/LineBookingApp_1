@@ -741,7 +741,7 @@ app.post('/callback', async (req, res) => {
        if(req.body.events[0].message.text == "Creliff")
        {
            
-              const options1 = {
+              var options1 = {
              method: 'POST',
              uri: 'https://api.line.me/liff/v1/apps',
              header:{
@@ -756,11 +756,12 @@ app.post('/callback', async (req, res) => {
             }
            };
            
+           var stro ="";
            await request(options1, (err, response, body) => {
-               replyText(clientBot_2, req.body.events[0].replyToken,  response.liffId, "qq");
-            })
+              stro =  response.liffId;
+            });
            
-           
+            await replyText(clientBot_2, req.body.events[0].replyToken,  stro, "qq");
            /*
              var headers = {
                 'Content-Type': 'application/json',
