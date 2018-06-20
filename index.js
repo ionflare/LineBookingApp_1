@@ -770,7 +770,7 @@ function deployLIFF(){
             var body = {
               
                 view: {
-                    type: 'tall',
+                    type: 'compact',
                     url: 'https://test-liff-1.herokuapp.com/'
                 }
             }
