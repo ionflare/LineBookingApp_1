@@ -713,7 +713,7 @@ function getLIFF(){
                 json: true
             },function (error, response, body){
                if (!error) {
-                   resolve(response.statusCode);
+                   resolve(body);
                    
                }
             });
@@ -810,8 +810,8 @@ app.post('/callback', async (req, res) => {
        else if(req.body.events[0].message.text == "Liff")
        {
            
-          var status_code = await getLIFF();
-        await replyText(clientBot_2, req.body.events[0].replyToken,  status_code, "qq");
+          var body = await getLIFF();
+        await replyText(clientBot_2, req.body.events[0].replyToken,  body[0].liffId, "qq");
             
        }
        
