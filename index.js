@@ -705,7 +705,7 @@ function deployLIFF(){
 
              var options1 = {
              method: 'POST',
-             uri: 'https://api.line.me/liff/v1/apps',
+             url: 'https://api.line.me/liff/v1/apps',
              header:{
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
@@ -720,8 +720,8 @@ function deployLIFF(){
            
            var stro ="";
            request(options1, (err, response, body) => {
-              stro =  response.liffId;
-            });
+              stro =  body;
+            })
            
   
         
