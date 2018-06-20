@@ -784,34 +784,20 @@ app.post('/callback', async (req, res) => {
            
            var testliff = await deployLIFF();
            await replyText(clientBot_2, req.body.events[0].replyToken,  testliff, "qq");
-           /*
-             var headers = {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
-            }
-            var body = {
-                
-                view: [{
-                    type: 'tall',
-                    url: 'https://test-liff-1.herokuapp.com/'
-                }]
-            }
-            var url = 'https://api.line.me/liff/v1/apps';
-            await request({
-                url: url,
-                method: 'POST',
-                headers: headers,
-                body: body,
-                json: true
-            });
-            */
+          
        }
        
        else if(req.body.events[0].message.text == "Liff")
        {
            
           var Liffbody = await getLIFF();
-        await replyText(clientBot_2, req.body.events[0].replyToken,  Liffbody.apps[0].liffId, "qq");
+          var listLiff = "";
+          for(var liff_idx =0; liff_idx < Liffbody.apps.length; liff_idx++ )
+          {
+             listLiff = listLiff + " - " + Liffbody.apps[liff_idx].liffId;
+          }
+         
+        await replyText(clientBot_2, req.body.events[0].replyToken,  listLiff, "qq");
             
        }
        
