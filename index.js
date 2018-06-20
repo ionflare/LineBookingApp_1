@@ -328,8 +328,8 @@ function replyCoro(client,replyToken) {
           {
             "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
             "imageBackgroundColor": "#FFFFFF",
-            "title": "this is menu",
-            "text": "description",
+            "title": "this is test menu",
+            "text": "test description",
             "defaultAction": {
                 "type": "uri",
                 "label": "View detail",
@@ -337,14 +337,15 @@ function replyCoro(client,replyToken) {
             },
             "actions": [
                 {
-                    "type": "uri",
-                    "label": "Liff",
-                    "uri": "line://app/1550488155-yd60LmP5"
-                },
-                {
-                   "type": "uri",
+                      "type": "uri",
                     "label": "Open QR Code reader",
                     "uri": "line://nv/QRCodeReader"
+               
+                },
+                {
+                     "type": "uri",
+                    "label": "Liff",
+                    "uri": "line://app/1550488155-yd60LmP5"
                 },
                 {
                     "type": "uri",
