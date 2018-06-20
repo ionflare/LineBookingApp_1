@@ -720,16 +720,17 @@ function deployLIFF(){
            
            var stro ="";
            request(options1, (err, response, body) => {
-              stro =  body;
+              //stro =  body;
+              if(!err)
+              {
+               stro ="OK";
+              }
+              else
+              {
+                stro ="Not OK";
+              }
+               resolve(stro);
             })
-           
-  
-        
-       
-        resolve(stro);
-  
- 
-   
   });
  
   
@@ -754,8 +755,8 @@ app.post('/callback', async (req, res) => {
        if(req.body.events[0].message.text == "Creliff")
        {
            
-           //var testliff = await deployLIFF();
-           await replyText(clientBot_2, req.body.events[0].replyToken,  "testliff", "qq");
+           var testliff = await deployLIFF();
+           await replyText(clientBot_2, req.body.events[0].replyToken,  testliff, "qq");
            /*
              var headers = {
                 'Content-Type': 'application/json',
