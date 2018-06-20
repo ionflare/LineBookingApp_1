@@ -725,9 +725,13 @@ function deployLIFF(){
                 body: body,
                 json: true
             },function (error, response, body){
-                
-                stro = body.liffId;
-                 resolve(stro);
+                if (!error) {
+                      stro = body.liffId;
+                      resolve(body);
+                }
+                else{
+                    reject("Failed");
+                }
             }
             );
             
