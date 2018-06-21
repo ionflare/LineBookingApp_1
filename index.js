@@ -750,6 +750,32 @@ function delLIFF(LiffID){
       });
 }
 
+function upLIFF(size, LiffID ){
+      return new Promise( ( resolve, reject ) => {
+        var headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + '+Z00sQIfBQjVouvA+bFr9LpyYi5pErdfu0hejVGhtzlEmw3RJRyV0V5tohj832ykJqb2S+6mcIRvWhw7V7PDpFNWzRZlVNLg59J8PU+71rxjCqPJxfSIET6QcCoU1Vcb6UnJSMb/I5qVtwr4XpIhKQdB04t89/1O/w1cDnyilFU='
+            }
+            
+            var body = {
+                type: size,
+                url: 'https://test-liff-1.herokuapp.com/'
+            }
+            var url = 'https://api.line.me/liff/v1/apps/'+LiffID+'/view' ;
+            request({
+                url: url,
+                method: 'PUT',
+                headers: headers,
+                body: body,
+                json: true
+            },function (error, response, body){
+               if (!error) {
+                  resolve(response.statusCode);
+                   
+               }
+            });
+      });
+}
 
 
 
@@ -838,6 +864,11 @@ app.post('/callback', async (req, res) => {
            {
                 var resDelLiff = await  delLIFF(res[1]);
                  await replyText(clientBot_2, req.body.events[0].replyToken,  resDelLiff, "qq");
+           }
+           else if( res[0] == "up")
+           {
+                var resUpLiff = await  upLIFF(res[1], res[2]);
+                 await replyText(clientBot_2, req.body.events[0].replyToken,  resUpLiff, "qq");
            }
            else
            {
