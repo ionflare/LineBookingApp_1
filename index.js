@@ -771,7 +771,7 @@ function deployLIFF(){
               
                 view: {
                     type: 'Tall',
-                    url: 'https://test-liff-1.herokuapp.com/index.html'
+                    url: 'https://test-liff-1.herokuapp.com'
                 }
             }
             var url = 'https://api.line.me/liff/v1/apps';
