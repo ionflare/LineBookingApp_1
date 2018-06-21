@@ -345,7 +345,7 @@ function replyCoro(client,replyToken) {
                 {
                      "type": "uri",
                     "label": "Liff",
-                    "uri": "line://app/1550488155-wlm6pyJk"
+                    "uri": "line://app/1550488155-yd60LmP5"
                 },
                 {
                     "type": "uri",
@@ -770,7 +770,7 @@ function deployLIFF(){
             var body = {
               
                 view: {
-                    type: 'compact',
+                    type: 'tall',
                     url: 'https://test-liff-1.herokuapp.com/'
                 }
             }
